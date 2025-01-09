@@ -22,8 +22,11 @@ def create_app():
             name=request.form.get("name")
             password=request.form.get("password")
             confirm_password=request.form.get("confirm-password")
+            valid_password=""
+            if password==confirm_password:
+                valid_password=password
 
-            user1=User(username=name, password=password)
+            user1=User(username=name, password=valid_password)
             db.session.add(user1)
             db.session.commit()
             return redirect("/home")
